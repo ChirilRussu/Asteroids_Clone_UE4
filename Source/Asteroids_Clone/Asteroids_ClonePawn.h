@@ -4,7 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "On_Hit_Border.h"
 #include "Asteroids_ClonePawn.generated.h"
+
 
 UCLASS(Blueprintable)
 class AAsteroids_ClonePawn : public APawn
