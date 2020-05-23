@@ -12,6 +12,10 @@
 #include "Engine/StaticMesh.h"
 #include "Kismet/GameplayStatics.h"
 #include "Sound/SoundBase.h"
+#include "On_Hit_Border.h"
+#include "Engine.h"
+#include "Math/Vector.h"
+
 
 const FName AAsteroids_ClonePawn::MoveForwardBinding("MoveForward");
 const FName AAsteroids_ClonePawn::MoveRightBinding("MoveRight");
