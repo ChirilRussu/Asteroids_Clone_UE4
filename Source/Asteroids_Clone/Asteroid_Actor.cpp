@@ -43,9 +43,6 @@ void AAsteroid_Actor::Tick(float DeltaTime)
 	// moves the actor
 	FVector Offset = FVector(1, 0, 0);
 	AddActorWorldOffset(Offset);
-
-
-	DrawDebugSphere(GetWorld(), GetActorLocation(), SphereRadius, 20, FColor::Purple, false, -1, 0, 1);
 }
 
 void AAsteroid_Actor::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
@@ -55,5 +52,6 @@ void AAsteroid_Actor::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, 
 		Destroy();
 	}
 }
+
 
 
