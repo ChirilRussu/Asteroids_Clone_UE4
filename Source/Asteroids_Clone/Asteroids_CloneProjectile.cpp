@@ -16,7 +16,7 @@ AAsteroids_CloneProjectile::AAsteroids_CloneProjectile()
 	ProjectileMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ProjectileMesh0"));
 	ProjectileMesh->SetStaticMesh(ProjectileMeshAsset.Object);
 	ProjectileMesh->SetupAttachment(RootComponent);
-	ProjectileMesh->BodyInstance.SetCollisionProfileName("Projectile");
+	ProjectileMesh->BodyInstance.SetCollisionProfileName("Pawn");
 	ProjectileMesh->OnComponentHit.AddDynamic(this, &AAsteroids_CloneProjectile::OnHit);		// set up a notification for when this component hits something
 	RootComponent = ProjectileMesh;
 
