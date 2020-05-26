@@ -5,6 +5,9 @@
 #include "Components/StaticMeshComponent.h"
 #include "DrawDebugHelpers.h"
 #include "Components/SphereComponent.h"
+#include "UObject/ConstructorHelpers.h"
+#include "Engine/CollisionProfile.h"
+
 
 
 
@@ -25,6 +28,13 @@ AAsteroid_Actor::AAsteroid_Actor()
 	MyMesh->SetupAttachment(RootComponent);
 
 	MyCollisionSphere->OnComponentBeginOverlap.AddDynamic(this, &AAsteroid_Actor::OnOverlapBegin);
+
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> ShipMesh(TEXT("/Game/Meshes/Asteroid.Asteroid"));
+	// Create the mesh component
+	ShipMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Asteroid_Mesh"));
+	RootComponent = ShipMeshComponent;
+	ShipMeshComponent->SetCollisionProfileName(UCollisionProfile::Pawn_ProfileName);
+	ShipMeshComponent->SetStaticMesh(ShipMesh.Object);
 
 }
 
