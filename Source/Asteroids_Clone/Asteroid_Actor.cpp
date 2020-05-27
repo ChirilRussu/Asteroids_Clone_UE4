@@ -36,7 +36,7 @@ AAsteroid_Actor::AAsteroid_Actor()
 	// sphere transformation to make it fit the asteroid better
 	FRotator Sphere_Rotation = FRotator(0, 0, 0);
 	FVector Sphere_Location = FVector(0, 0, 0);
-	FVector Sphere_Scale = FVector(10, 10, 10);
+	FVector Sphere_Scale = FVector(1.2, 1.2, 1.2);
 	FTransform Sphere_All_Transform = FTransform(Sphere_Rotation, Sphere_Location, Sphere_Scale);
 	Asteroid_Collision_Sphere->SetRelativeTransform(Sphere_All_Transform);
 }
