@@ -29,9 +29,9 @@ void UAsteroid_Spawner::BeginPlay()
 		int Number_Of_Asteroids = 5;
 		for (int32 Asteroid_Number = 0; Asteroid_Number < Number_Of_Asteroids; Asteroid_Number++)
 		{
-			int Random_Location_X = FMath::RandRange(0, 900);
+			int Random_Location_X = FMath::RandRange(0, 1);
 			int Random_Location_Y = FMath::RandRange(0, 900);
-			FVector Location = FVector(Random_Location_X, Random_Location_Y, 170);
+			FVector Location = FVector(Random_Location_X, Random_Location_Y, 290.0);
 			FRotator Rotation = FRotator(0, 0, 0);
 			Spawn_Asteroid(Location, Rotation);
 		}
