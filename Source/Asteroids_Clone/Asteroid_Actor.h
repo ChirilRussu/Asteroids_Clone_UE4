@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "Asteroid_Actor.generated.h"
 
+
 UCLASS()
 class ASTEROIDS_CLONE_API AAsteroid_Actor : public AActor
 {

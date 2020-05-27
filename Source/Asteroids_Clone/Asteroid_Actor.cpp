@@ -7,6 +7,8 @@
 #include "Components/SphereComponent.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Engine/CollisionProfile.h"
+#include "Math/TransformNonVectorized.h"
+
 
 
 // Sets default values
@@ -28,8 +30,15 @@ AAsteroid_Actor::AAsteroid_Actor()
 	Asteroid_Collision_Sphere->InitSphereRadius(Sphere_Radius);
 	Asteroid_Collision_Sphere->SetCollisionProfileName("Trigger");
 	Asteroid_Collision_Sphere->OnComponentBeginOverlap.AddDynamic(this, &AAsteroid_Actor::OnOverlapBegin);
+	FVector Component_Offset = FVector(70, 0, 0);
 	Asteroid_Collision_Sphere->SetupAttachment(Asteroid_Mesh_Component);
 
+	// sphere transformation to make it fit the asteroid better
+	FRotator Sphere_Rotation = FRotator(0, 0, 0);
+	FVector Sphere_Location = FVector(0, 0, 0);
+	FVector Sphere_Scale = FVector(10, 10, 10);
+	FTransform Sphere_All_Transform = FTransform(Sphere_Rotation, Sphere_Location, Sphere_Scale);
+	Asteroid_Collision_Sphere->SetRelativeTransform(Sphere_All_Transform);
 }
 
 // Called when the game starts or when spawned
