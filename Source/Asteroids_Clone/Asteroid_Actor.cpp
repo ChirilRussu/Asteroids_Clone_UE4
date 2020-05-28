@@ -5,6 +5,9 @@
 #include "Components/StaticMeshComponent.h"
 #include "DrawDebugHelpers.h"
 #include "Components/SphereComponent.h"
+#include "UObject/ConstructorHelpers.h"
+#include "Engine/CollisionProfile.h"
+#include "Math/TransformNonVectorized.h"
 
 
 
@@ -14,18 +17,27 @@ AAsteroid_Actor::AAsteroid_Actor()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	SphereRadius = 100.0f;
+	// Mesh component
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> AsteroidMesh(TEXT("/Game/Meshes/Asteroid.Asteroid"));
+	Asteroid_Mesh_Component = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Asteroid_Mesh"));
+	RootComponent = Asteroid_Mesh_Component;
+	Asteroid_Mesh_Component->SetCollisionProfileName(UCollisionProfile::Pawn_ProfileName);
+	Asteroid_Mesh_Component->SetStaticMesh(AsteroidMesh.Object);
+		
+	// collision sphere
+	Sphere_Radius = 100.0f;
+	Asteroid_Collision_Sphere = CreateDefaultSubobject<USphereComponent>(TEXT("Asteroid Sphere Component"));
+	Asteroid_Collision_Sphere->InitSphereRadius(Sphere_Radius);
+	Asteroid_Collision_Sphere->SetCollisionProfileName("Trigger");
+	Asteroid_Collision_Sphere->OnComponentBeginOverlap.AddDynamic(this, &AAsteroid_Actor::OnOverlapBegin);
+	Asteroid_Collision_Sphere->SetupAttachment(Asteroid_Mesh_Component);
 
-	MyCollisionSphere = CreateDefaultSubobject<USphereComponent>(TEXT("My Sphere Component"));
-	MyCollisionSphere->InitSphereRadius(SphereRadius);
-	MyCollisionSphere->SetCollisionProfileName("Trigger");
-	RootComponent = MyCollisionSphere;
-
-	MyMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("My Mesh"));
-	MyMesh->SetupAttachment(RootComponent);
-
-	MyCollisionSphere->OnComponentBeginOverlap.AddDynamic(this, &AAsteroid_Actor::OnOverlapBegin);
-
+	// sphere transformation to make it fit the asteroid better
+	FRotator Sphere_Rotation = FRotator(0, 0, 0);
+	FVector Sphere_Location = FVector(0, 0, 80.0);
+	FVector Sphere_Scale = FVector(1.3, 1.3, 1.3);
+	FTransform Sphere_All_Transform = FTransform(Sphere_Rotation, Sphere_Location, Sphere_Scale);
+	Asteroid_Collision_Sphere->SetRelativeTransform(Sphere_All_Transform);
 }
 
 // Called when the game starts or when spawned
