@@ -53,7 +53,7 @@ AAsteroids_ClonePawn::AAsteroids_ClonePawn()
 	// Movement
 	MoveSpeed = 1000.0f;
 	// Weapon
-	GunOffset = FVector(90.f, 0.f, 200.f);
+	GunOffset = FVector(0.f, 0.f, 75.f);
 	FireRate = 0.1f;
 	bCanFire = true;
 }

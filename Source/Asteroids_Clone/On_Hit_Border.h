@@ -15,8 +15,6 @@ public:
 	// Sets default values for this actor's properties
 	AOn_Hit_Border();
 
-	FString Test_String = FString::Printf(TEXT("Ship Spawned"));
-
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
