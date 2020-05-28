@@ -42,7 +42,7 @@ void AOn_Hit_Border::On_Border_Hit(UPrimitiveComponent* HitComp, AActor* OtherAc
 	{
 		if(GEngine)
 		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("I Hit: %s"), *OtherActor->GetName()));
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("%s hit a border."), *OtherActor->GetName()));
 		}
 	}
 }
